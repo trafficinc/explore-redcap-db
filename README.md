@@ -4,13 +4,15 @@ This is a small tool to get to know which tables in Redcap are affected by actio
 
 Update  `dbconfig.example.php` with database creds, then change filename to `dbconfig.php`
 
-1) Before you make a change in Redcap run: $ `php knowRedCap.php before`
+First run `php learndb.php get-tables` to update the tables for this tool to use.
+
+1) Before you make a change in Redcap run: $ `php learndb.php before`
 
 2) Do something on the app UI, like fill out and submit a form, ie. create a new project.
 
-3) After you make a change in Redcap run: $ `php knowRedCap.php after`
+3) After you make a change in Redcap run: $ `php learndb.php after`
 
-4) To see what was changed in the DB tables, run: $ `php knowRedCap.php compare`
+4) To see what was changed in the DB tables, run: $ `php learndb.php compare`
 
 Now you will be able to see what database tables were effected! **Note: this works on inserts and deletes, not updates.  Updates are more complicated and not supported yet, if you have a good idea, please share and we can implement it for updates.
 
@@ -34,4 +36,4 @@ Inserts found:
 
 ### Other
 
-Save output to a file: `php knowRedCap.php compare > new_project_output.txt`
+Save output to a file: `php learndb.php compare > new_project_output.txt`
