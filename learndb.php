@@ -17,6 +17,9 @@ if ($argc > 1) {
             case "compare":
                 $rc->compare();
             break;
+            case str_contains($argv[$i],'export'):
+                $rc->exportFile($argv[$i]);
+            break;
             case "get-tables":
                 $rc->getTables();
             break;

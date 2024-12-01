@@ -2,7 +2,7 @@
 
 This is a small tool to get to know which tables in Redcap are affected by actions via DB inserts and deletes.
 
-Update  `dbconfig.example.php` with database creds, then change filename to `dbconfig.php`
+Update  `dbconfig.example.php` with database creds, then change filename to `dbconfig.php`, and update the `config.php` file (make sure the directory exists for exports).
 
 First run `php learndb.php get-tables` to update the tables for this tool to use.
 
@@ -13,6 +13,14 @@ First run `php learndb.php get-tables` to update the tables for this tool to use
 3) After you make a change in Redcap run: $ `php learndb.php after`
 
 4) To see what was changed in the DB tables, run: $ `php learndb.php compare`
+
+### Export Data to Files
+
+ `php learndb.php export="new_project_output.txt"`
+
+ This command will run a "compare", and export to the file name specified and to the file path specified in the `config.php` file.
+
+ Or save output to a file: `php learndb.php compare > new_project_output.txt`
 
 Now you will be able to see what database tables were effected! **Note: this works on inserts and deletes, not updates.  Updates are more complicated and not supported yet, if you have a good idea, please share and we can implement it for updates.
 
@@ -34,6 +42,3 @@ Inserts found:
   
 &nbsp;&nbsp;table 'redcap_events_arms' [INSERT] : OLD: 16 vs. NEW: 17
 
-### Other
-
-Save output to a file: `php learndb.php compare > new_project_output.txt`

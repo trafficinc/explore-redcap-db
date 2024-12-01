@@ -1,88 +1,98 @@
 <?php
 
 
-class Database {
+class Database
+{
 
 	private $conn;
 	private $error;
 	private $stmt;
 
-	
-	public function __construct() {
+
+	public function __construct()
+	{
 		include_once('dbconfig.php');
 		$dsn = 'mysql:host=' . $host . ';dbname=' . $db;
 
-		$options = array (
+		$options = array(
 			PDO::ATTR_PERSISTENT => true,
-			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION 
+			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
 		);
 
 		try {
-			$this->conn = new PDO ($dsn, $user, $pass, $options);
-		}	
-		catch ( PDOException $e ) {
+			$this->conn = new PDO($dsn, $user, $pass, $options);
+		} catch (PDOException $e) {
 			$this->error = $e->getMessage();
 			// print_r( $e );
 		}
 	}
 
-	public function query($query) {
+	public function query($query)
+	{
 		$this->stmt = $this->conn->query($query);
 	}
 
-		// Prepare statement with query
-	public function queryPrepare($query) {
+	// Prepare statement with query
+	public function queryPrepare($query)
+	{
 		$this->stmt = $this->conn->prepare($query);
 	}
-	
+
 	// Bind values
-	public function bind($param, $value, $type = null) {
-		if (is_null ($type)) {
+	public function bind($param, $value, $type = null)
+	{
+		if (is_null($type)) {
 			switch (true) {
-				case is_int ($value) :
+				case is_int($value):
 					$type = PDO::PARAM_INT;
 					break;
-				case is_bool ($value) :
+				case is_bool($value):
 					$type = PDO::PARAM_BOOL;
 					break;
-				case is_null ($value) :
+				case is_null($value):
 					$type = PDO::PARAM_NULL;
 					break;
-				default :
+				default:
 					$type = PDO::PARAM_STR;
 			}
 		}
 		$this->stmt->bindValue($param, $value, $type);
 	}
-	
+
 	// Execute the prepared statement
-	public function execute(){
+	public function execute()
+	{
 		return $this->stmt->execute();
 	}
 
-	public function exec($sql){
+	public function exec($sql)
+	{
 		return $this->conn->exec($sql);
 	}
-	
+
 	// Get result set as array of objects
-	public function resultset(){
+	public function resultset()
+	{
 		$this->execute();
 		return $this->stmt->fetchAll(PDO::FETCH_OBJ);
 	}
-	
+
 	// Get single record as object
-	public function single(){
+	public function single()
+	{
 		$this->execute();
 		return $this->stmt->fetch(PDO::FETCH_OBJ);
 	}
-	
+
 	// Get record row count
-	public function rowCount(){
+	public function rowCount()
+	{
 		return $this->stmt->rowCount();
 	}
-	
+
 	// Returns the last inserted ID
-	public function lastInsertId(){
+	public function lastInsertId()
+	{
 		return $this->conn->lastInsertId();
 	}
 }
