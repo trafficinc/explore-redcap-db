@@ -5,6 +5,7 @@ class KnowRedCap {
     private $db;
     private string $cachfilePath;
     private string $rootfilePath;
+   
 
     public array $tables;
 
@@ -13,6 +14,7 @@ class KnowRedCap {
         $this->db = $db;
         $this->cachfilePath = dirname(__DIR__).DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR;
         $this->rootfilePath = dirname(__DIR__).DIRECTORY_SEPARATOR;
+       
         if (!file_exists($this->rootfilePath."tables.php")) {
             $this->getTables();
             $this->tables = include($this->rootfilePath.'tables.php');
@@ -56,6 +58,7 @@ class KnowRedCap {
             foreach ($differences['differences'] as $difference) {
                 echo $difference . "\n";
             }
+            echo "------------------------------------------------\n";
             echo "Deletes found:\n";
             foreach ($differences['deletes'] as $delete) {
                 echo $delete . "\n";
