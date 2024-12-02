@@ -95,4 +95,16 @@ class Database
 	{
 		return $this->conn->lastInsertId();
 	}
+
+	public function getStmt() {
+		return $this->stmt;
+	}
+
+	public function fetchAll($type = PDO::FETCH_OBJ) {
+		return $this->stmt->fetchAll($type);
+	}
+
+	public function fetch($type = PDO::FETCH_OBJ) {
+		return $this->stmt->fetch($type);
+	}
 }

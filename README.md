@@ -22,7 +22,7 @@ First run `php learndb.php get-tables` to update the tables for this tool to use
 
  Or save output to a file: `php learndb.php compare > new_project_output.txt`
 
-Now you will be able to see what database tables were effected! **Note: this works on inserts and deletes, not updates.  Updates are more complicated and not supported yet, if you have a good idea, please share and we can implement it for updates.
+Now you will be able to see what database tables were effected! **Note: this works on inserts and deletes, and updates, it expects primary keys in tables, if not present it will tka ethe first column for updates.  Updates show just the row that was updated, not the specific column in the row, but the row can be found by the "PK Row ID" in "Updates Found:".
 
 ## Example output:
 
@@ -41,4 +41,6 @@ Inserts found:
 &nbsp;&nbsp;table 'redcap_crons_history' [INSERT] : OLD: 9908 vs. NEW: 9921
   
 &nbsp;&nbsp;table 'redcap_events_arms' [INSERT] : OLD: 16 vs. NEW: 17
+
+Updates found: ...
 
